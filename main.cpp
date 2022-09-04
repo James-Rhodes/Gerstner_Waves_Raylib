@@ -16,11 +16,6 @@ int main()
     // Model drawing position
     Vector3 position = {0.0f, 0.0f, 0.0f};
 
-    Image checked = GenImageChecked(4, 4, 1, 1, RED, GREEN);
-    Texture2D texture = LoadTextureFromImage(checked);
-    UnloadImage(checked);
-    // GenMeshPlane has width, height, numtrianglesX, numtrianglesY
-
     Shader shader = LoadShader("shaders/Waves_Vertex.vs",
                                "shaders/Waves_Fragment.fs");
 
@@ -28,7 +23,6 @@ int main()
     shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
     // NOTE: "matModel" location name is automatically assigned on shader loading,
     // no need to get the location again if using that uniform name
-    // shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
 
     // Ambient light level (some basic lighting)
     int ambientLoc = GetShaderLocation(shader, "ambient");
@@ -58,10 +52,8 @@ int main()
 
         float cameraPos[3] = {camera.position.x, camera.position.y, camera.position.z};
         SetShaderValue(shader, shader.locs[SHADER_LOC_VECTOR_VIEW], cameraPos, SHADER_UNIFORM_VEC3);
-        // light.position.x = cameraPos[0];
-        // light.position.y = cameraPos[1];
-        // light.position.z = cameraPos[2];
-        // UpdateLightValues(shader, light);
+
+        UpdateLightValues(shader, light);
 
         //----------------------------------------------------------------------------------
         // Draw

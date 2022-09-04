@@ -140,13 +140,6 @@ void main()
     vec3 viewD = normalize(viewPos - fragPosition);
     vec3 specular = vec3(0.0);
 
-    // NOTE: Implement here your fragment shader code
-    // texelColor = vec4(fragNormal*0.5 + 0.5,1.0);
-
-    // texelColor = vec4(normal,1.0);
- 
-
-    // texelColor = vec4(1.0,0.0,0.0,1.0);
 
     for (int i = 0; i < MAX_LIGHTS; i++)
     {
